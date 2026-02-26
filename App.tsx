@@ -22,7 +22,7 @@ import { Settings } from './components/Settings';
 import { ChangePasswordModal } from './components/ChangePasswordModal';
 
 import { getAllData, createRecord, updateRecord, deleteRecord } from './services/googleSheetService';
-
+const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 type View = 'dashboard' | 'fleet' | 'request' | 'history' | 'pending' | 'workshops' | 'completed' | 'admin' | 'settings';
 
 const AppContent: React.FC = () => {
