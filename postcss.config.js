@@ -1,6 +1,5 @@
-export default {
+eexport default {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+    "@tailwindcss/postcss": {},
   },
-}
+};
