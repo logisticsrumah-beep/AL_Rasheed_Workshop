@@ -1,8 +1,11 @@
 import type { Equipment, Workshop, RepairRequest, User } from '../types';
 
-const SCRIPT_URL = import.meta.env.VITE_SHEETDB_URL;
+// Sirf ek hi consistent variable use karein jo aapki .env file mein hai
+const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
 export const getAllData = async () => {
+  if (!SCRIPT_URL) throw new Error("VITE_GOOGLE_SCRIPT_URL is not defined");
+  
   const response = await fetch(`${SCRIPT_URL}?action=getAllData`);
   if (!response.ok) {
     throw new Error('Failed to fetch data from Google Sheet.');
@@ -12,6 +15,8 @@ export const getAllData = async () => {
 };
 
 const postData = async (action: string, payload: any, sheetName: string) => {
+  if (!SCRIPT_URL) throw new Error("VITE_GOOGLE_SCRIPT_URL is not defined");
+
   const response = await fetch(SCRIPT_URL, {
     method: 'POST',
     mode: 'cors',
@@ -20,6 +25,7 @@ const postData = async (action: string, payload: any, sheetName: string) => {
     },
     body: JSON.stringify({ action, payload, sheetName }),
   });
+
   if (!response.ok) {
     throw new Error(`Failed to ${action} data in ${sheetName}.`);
   }
